@@ -1,10 +1,11 @@
-### PART 1 ###
-
 import numpy as np
 import cv2 as cv
 import matplotlib.pyplot as plt
+from os.path import exists
 
-show_steps = False
+### PART 1 ###
+
+show_steps = True
 img1_name = "hallway_left.jpg"
 img2_name = "hallway_right.jpg"
 
@@ -149,7 +150,7 @@ img3, img4 = drawlines(img2, img1, lines2, pts2, pts1)
 #plt.suptitle("Epilines in both images")
 #plt.show()
 
-### STERO RECTIFICATION ###
+### STEREO RECTIFICATION ###
 
 # Stereo rectification (uncalibrated variant)
 # Adapted from: https://stackoverflow.com/a/62607343
@@ -159,14 +160,18 @@ _, H1, H2 = cv.stereoRectifyUncalibrated(
     np.float32(pts1), np.float32(pts2), fundamental_matrix, imgSize=(w1, h1)
 )
 
-### STERO RECTIFICATION PERSPECTIVE TRANSFORMATION ###
+### STEREO RECTIFICATION PERSPECTIVE TRANSFORMATION ###
 
 # Undistort (rectify) the images and save them
 # Adapted from: https://stackoverflow.com/a/62607343
 img1_rectified = cv.warpPerspective(img1, H1, (w1, h1))
 img2_rectified = cv.warpPerspective(img2, H2, (w2, h2))
-cv.imwrite("rectified_1.png", img1_rectified)
-cv.imwrite("rectified_2.png", img2_rectified)
+
+if not exists("rectified_" + img1_name):
+    cv.imwrite("rectified_" + img1_name, img1_rectified)
+
+if not exists("rectified_" + img2_name):
+    cv.imwrite("rectified_" + img2_name, img2_rectified)
 
 ### DRAW STEREO RECTIFIED IMAGES ###
 
