@@ -28,8 +28,8 @@ I'd like to develop it further so it can work in realtime on a phone, and prefer
 - They are turned to grayscale and "rectified", meaning the computer tries to find common points between the two images
 ### Boundary Detection
 - Detect the boundaries of the shapes found in the images to identify objects in the area
-### Calculating Disparity and Depth Map
-- Using rectification to and boundary detection so the system can make sense of the room in a 3D sense, it then goes on to calculate the depth of certain parts of the image
+### Depth Map
+- Using rectification to and boundary detection so the system can make sense of the room in a 3D sense, it then goes on to calculate the approximate depth of different parts of the image
 - By averaging the depth value of the image, we can determine if the image appears to have depth or lack depth, indicating whether it is safe to walk forward or not
 
 ## Future Work
