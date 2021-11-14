@@ -1,5 +1,5 @@
 # SeeSafe
-Developed to aid the visually impaired as an alternative to a seeing eye dog or cane, this system takes visual data and determines if it is safe to move forward by determining if there are obstacles in front of the user.
+Developed to aid the visually impaired as an alternative to a seeing eye dog or cane, this system takes visual data and determines if it is safe to move forward by determining if there are obstacles in front of the user. This project is a submission to TCNJ-HackDown-2021.
 
 ## Inspiration
 I was eager to start learning about machine learning which I don't have a lot of experience with yet, and looking to build a useful healthcare hack, so I decided to develop a system to aid visually impaired people.
