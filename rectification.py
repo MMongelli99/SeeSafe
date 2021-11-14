@@ -240,19 +240,20 @@ cv.imshow("Disparity", disparity_SGBM)
 cv.imwrite("disparity_SGBM_norm.png", disparity_SGBM)
 
 ### COLORED DISPARITY MAP ###
-
+'''
 plt.imshow(disparity_SGBM, cmap='plasma')
 plt.colorbar()
 plt.show()
-
+'''
 
 def move_forward(image):
     # Check if depth of image suggests it is safe for user to move forward
     # Depth is determined by the darkness of the image
     blur = cv.blur(image, (5, 5))  # With kernel size depending upon image size
-    offset = -50 # adjustment because sides of image are always dark after processing
+    offset = -100 # adjustment because sides of image are always dark after processing
     threshold = 127 + offset # The range for a pixel's value in grayscale is (0-255), 127 lies midway
     brightness = np.mean(blur)
+    print(f"{brightness=}, {threshold=}")
     if brightness > threshold:
         return True # (127 - 255) denotes light image
     else:
