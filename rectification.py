@@ -4,6 +4,7 @@ import numpy as np
 import cv2 as cv
 import matplotlib.pyplot as plt
 
+show_steps = False
 img1_name = "hallway_left.jpg"
 img2_name = "hallway_right.jpg"
 
@@ -19,17 +20,16 @@ img2_undistorted = cv.imread(img2_name, cv.IMREAD_GRAYSCALE)
 # PREPROCESSING
 
 # Compare unprocessed images
-'''
-fig, axes = plt.subplots(1, 2, figsize=(15, 10))
-axes[0].imshow(img1, cmap="gray")
-axes[1].imshow(img2, cmap="gray")
-axes[0].axhline(250)
-axes[1].axhline(250)
-axes[0].axhline(450)
-axes[1].axhline(450)
-plt.suptitle("Original images")
-plt.show()
-'''
+if show_steps:
+    fig, axes = plt.subplots(1, 2, figsize=(15, 10))
+    axes[0].imshow(img1, cmap="gray")
+    axes[1].imshow(img2, cmap="gray")
+    axes[0].axhline(250)
+    axes[1].axhline(250)
+    axes[0].axhline(450)
+    axes[1].axhline(450)
+    plt.suptitle("Original images")
+    plt.show()
 
 ### PART 2 ###
 
@@ -49,9 +49,8 @@ kp2, des2 = sift.detectAndCompute(img2, None)
 # Visualize keypoints
 imgSift = cv.drawKeypoints(
     img1, kp1, None, flags=cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-'''
-cv.imshow("SIFT Keypoints", imgSift)
-'''
+if show_steps:
+    cv.imshow("SIFT Keypoints", imgSift)
 
 ### KEYFRAME MATCHING ###
 
@@ -90,9 +89,9 @@ draw_params = dict(matchColor=(0, 255, 0),
 
 keypoint_matches = cv.drawMatchesKnn(
     img1, kp1, img2, kp2, matches[300:500], None, **draw_params)
-'''
-cv.imshow("Keypoint matches", keypoint_matches)
-'''
+if show_steps:
+    cv.imshow("Keypoint matches", keypoint_matches)
+
 
 ### FUNDAMENTAL MATRIX ###
 
@@ -172,18 +171,17 @@ cv.imwrite("rectified_2.png", img2_rectified)
 ### DRAW STEREO RECTIFIED IMAGES ###
 
 # Draw the rectified images
-'''
-fig, axes = plt.subplots(1, 2, figsize=(15, 10))
-axes[0].imshow(img1_rectified, cmap="gray")
-axes[1].imshow(img2_rectified, cmap="gray")
-axes[0].axhline(250)
-axes[1].axhline(250)
-axes[0].axhline(450)
-axes[1].axhline(450)
-plt.suptitle("Rectified images")
-plt.savefig("rectified_images.png")
-plt.show()
-'''
+if show_steps:
+    fig, axes = plt.subplots(1, 2, figsize=(15, 10))
+    axes[0].imshow(img1_rectified, cmap="gray")
+    axes[1].imshow(img2_rectified, cmap="gray")
+    axes[0].axhline(250)
+    axes[1].axhline(250)
+    axes[0].axhline(450)
+    axes[1].axhline(450)
+    plt.suptitle("Rectified images")
+    plt.savefig("rectified_images.png")
+    plt.show()
 
 ### PART 3 ###
 
@@ -234,17 +232,16 @@ disparity_SGBM = stereo.compute(img1_undistorted, img2_undistorted)
 disparity_SGBM = cv.normalize(disparity_SGBM, disparity_SGBM, alpha=255,
                               beta=0, norm_type=cv.NORM_MINMAX)
 disparity_SGBM = np.uint8(disparity_SGBM) 
-'''
-cv.imshow("Disparity", disparity_SGBM)
-'''
+if show_steps:
+    cv.imshow("Disparity", disparity_SGBM)
+
 cv.imwrite("disparity_SGBM_norm.png", disparity_SGBM)
 
 ### COLORED DISPARITY MAP ###
-'''
-plt.imshow(disparity_SGBM, cmap='plasma')
-plt.colorbar()
-plt.show()
-'''
+if show_steps:
+    plt.imshow(disparity_SGBM, cmap='plasma')
+    plt.colorbar()
+    plt.show()
 
 def move_forward(image):
     # Check if depth of image suggests it is safe for user to move forward
