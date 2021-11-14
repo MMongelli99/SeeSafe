@@ -5,7 +5,7 @@ from os.path import exists
 
 ### PART 1 ###
 
-show_steps = True
+show_steps = False
 img1_name = "hallway_left.jpg"
 img2_name = "hallway_right.jpg"
 
@@ -14,8 +14,8 @@ img1 = cv.imread(img1_name, cv.IMREAD_GRAYSCALE)
 img2 = cv.imread(img2_name, cv.IMREAD_GRAYSCALE)
 
 # reload original images
-img1_undistorted = cv.imread(img1_name, cv.IMREAD_GRAYSCALE)
-img2_undistorted = cv.imread(img2_name, cv.IMREAD_GRAYSCALE)
+img1_undistorted = img1
+img2_undistorted = img2
 
 # ------------------------------------------------------------
 # PREPROCESSING
@@ -255,7 +255,8 @@ def move_forward(image):
     offset = -90 # adjustment because sides of image are always dark after processing
     threshold = 127 + offset # The range for a pixel's value in grayscale is (0-255), 127 lies midway
     brightness = np.mean(blur)
-    print(f"{brightness=}, {threshold=}")
+    if show_steps:
+        print(f"{brightness=}, {threshold=}")
     if brightness > threshold:
         return True # (127 - 255) denotes light image
     else:
