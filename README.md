@@ -24,5 +24,13 @@ I'd like to develop it further so it can work in realtime on a phone, and prefer
 
 ## Walkthrough
 ### Rectification
-- The system takes two images of the same room from slightly different angles. This gives a stereo view of the room (similar to our eyes) as opposed to a monocular view.
-- They are turned to grayscale and "rectified", meaning the computer tries to find common points between the two images.
+- The system takes two images of the same room from slightly different angles. This gives a stereo view of the room (similar to our eyes) as opposed to a monocular view
+- They are turned to grayscale and "rectified", meaning the computer tries to find common points between the two images
+### Boundary Detection
+- Detect the boundaries of the shapes found in the images to identify objects in the area
+### Calculating Disparity and Depth Map
+- Using rectification to and boundary detection so the system can make sense of the room in a 3D sense, it then goes on to calculate the depth of certain parts of the image
+- By averaging the depth value of the image, we can determine if the image appears to have depth or lack depth, indicating whether it is safe to walk forward or not
+
+## Future Work
+Accessibility is key to this project so in the future it would be good to make this algorithm work in realtime and preferably on a smartphone so the user can move around with ease, and the phone would vibrate when they are approaching an object they could collide with. Other computer vision algorithms may also be better suited to this problem. While researching resources for this project I saw one paper which was actually able to identify objects in the room and create a 3D cuboid representation of them. This would be helpful as it could probably be able to help one navigate a room more precisely, rather than simply calculating the average depth of the space in front of the user. However, the paper I found was rather dense for someone not familiar with computer vision, whereas the blogs I used to develop this project were much more beginner friendly.
