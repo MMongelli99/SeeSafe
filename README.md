@@ -21,3 +21,7 @@ I learned a bit about computer vision, image processing, image rectification, et
 
 ## What's next for SeeSafe
 I'd like to develop it further so it can work in realtime on a phone, and preferably vibrate to let the user know if it s safe to walk forward so they can use it to navigate unfamiliar rooms.
+
+## Walkthrough
+  ### Rectification
+  The system takes two images of the same room from slightly different angles. This gives a stereo view of the room (similar to our eyes) as opposed to a monocular view.
